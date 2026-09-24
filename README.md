@@ -1,8 +1,8 @@
-# PreLens
+# PrepLens
 
 AI-enabled competency assessment and learning platform for the Ministry of Statistics and Programme Implementation (MoSPI).
 
-PreLens3 connects official training material, FRAC competency diagnostics, personalized skill-gap roadmaps, and human-reviewed MCQ generation in one learning portal. It supports both administrators who create and review training content and learners who assess themselves, study mapped courses, and close competency gaps.
+PrepLens connects official training material, FRAC competency diagnostics, personalized skill-gap roadmaps, and human-reviewed MCQ generation in one portal. It supports both administrators creating and reviewing training content and learners assessing themselves, studying mapped courses, and closing competency gaps.
 
 ## What It Provides
 
@@ -11,23 +11,26 @@ PreLens3 connects official training material, FRAC competency diagnostics, perso
 - Skill-gap analysis against current and required competency levels
 - Personal learning roadmap with completion, save, notes, discussion, and AI Coach actions
 - In-app iGOT/NSSTA course study classroom with module progress and knowledge checks
-- Upload of searchable PDF, TXT, and JSON training manuals
-- Browser-side PDF text extraction using PDF.js
+- Upload of searchable PDF, DOCX, TXT, and JSON training manuals
+- Browser-side PDF extraction using PDF.js and DOCX extraction using Mammoth
 - Automatic MCQ generation from uploaded content or fixed manuals
 - Strict four-option MCQ validation before questions enter the review queue
 - Administrator review and approval workflow for generated questions
 - Gemini-powered MCQ generation and AI mentoring with deterministic fallback content
 - Department-level analytics, notifications, and technical architecture information
+- Working Question Studio flow for admin-side manual ingestion and question generation
 
 ## User Workflow
 
 ### Administrator
 
 1. Sign in to the administrator portal.
-2. Choose a fixed MoSPI manual or upload a searchable PDF/TXT/JSON manual.
+2. Choose a fixed MoSPI manual or upload a searchable PDF, DOCX, TXT, or JSON manual.
 3. Configure competency, cadre, question count, and difficulty.
 4. Uploading a manual extracts its text and starts MCQ generation automatically.
 5. Review, edit, approve, or reject generated questions in the Review Queue.
+
+> Question Studio is visible only after logging in as an admin.
 
 ### Learner
 
@@ -52,14 +55,16 @@ PreLens3 connects official training material, FRAC competency diagnostics, perso
 
 ```text
 src/
-	App.tsx                         Application state and routing
-	components/                     Portal views and workflows
-	data/                            Demo data, curricula, resources, and users
-	types.ts                         Shared domain types
-	utils/                           Shared browser utilities
-api/index.ts                      Vercel serverless Express entry point
-server.ts                         Local Express server and AI API routes
-vercel.json                       Vercel build and API routing configuration
+  App.tsx                         Application state and routing
+  components/                    Portal views and workflows
+  data/                          Demo data, curricula, resources, and users
+  types.ts                       Shared domain types
+  utils/                         Shared browser utilities
+api/
+  index.ts                       Vercel serverless Express entry point
+server.ts                       Local Express server and AI API routes
+vercel.json                     Vercel build and API routing configuration
+vite.config.ts                 Vite configuration
 ```
 
 ## Requirements
@@ -145,3 +150,15 @@ Set `GEMINI_API_KEY` in the Vercel project environment variables if live Gemini 
 ## Current Production Deployment
 
 [https://prep-lens-mu.vercel.app/](https://prep-lens-mu.vercel.app/)
+
+## Admin Login
+
+Use the admin login to access Question Studio:
+
+- Username: `admin`
+- Password: `Admin@MoSPI2026`
+
+The learner login is also available:
+
+- Username: `officer`
+- Password: `Learner@2026`
