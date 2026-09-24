@@ -1,4 +1,4 @@
-# PreLens3
+# PreLens
 
 AI-enabled competency assessment and learning platform for the Ministry of Statistics and Programme Implementation (MoSPI).
 
@@ -144,4 +144,4 @@ Set `GEMINI_API_KEY` in the Vercel project environment variables if live Gemini 
 
 ## Current Production Deployment
 
-[preplens2.vercel.app](https://preplens2.vercel.app)
+[https://prep-lens-mu.vercel.app/](https://prep-lens-mu.vercel.app/)
