@@ -119,7 +119,7 @@ These are demonstration accounts only and must not be used as production credent
 
 ## GitHub
 
-Repository: [github.com/chandu7756/PreLens3](https://github.com/chandu7756/PreLens3)
+Repository: [github.com/chandu7756/PreLens](https://github.com/chandu7756/PrepLens)
 
 Push changes to the `main` branch after validation:
 
