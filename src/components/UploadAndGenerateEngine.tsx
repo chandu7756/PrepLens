@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as pdfjsLib from 'pdfjs-dist/build/pdf.mjs';
+import * as mammoth from 'mammoth/mammoth.browser';
 import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import {
   TrainingDocument,
@@ -87,6 +88,12 @@ export const UploadAndGenerateEngine: React.FC<UploadAndGenerateEngineProps> = (
     return pages.join('\n\n').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
   };
 
+  const extractDocxText = async (file: File): Promise<string> => {
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    return (result.value || '').replace(/\s+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  };
+
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -102,8 +109,12 @@ export const UploadAndGenerateEngine: React.FC<UploadAndGenerateEngineProps> = (
         text = await extractPdfText(file);
       } else if (extension === 'txt' || extension === 'json') {
         text = await file.text();
+      } else if (extension === 'docx') {
+        text = await extractDocxText(file);
+      } else if (extension === 'doc') {
+        throw new Error('Legacy .doc files are not supported in the browser. Please convert the file to .docx, PDF, or TXT before uploading.');
       } else {
-        throw new Error('DOC and DOCX files are not text-readable in the browser yet. Upload a PDF or TXT export of the manual.');
+        throw new Error('This file type is not supported. Upload a searchable PDF, DOCX, TXT, or JSON export of the manual.');
       }
 
       if (text.length < 80) {
@@ -301,10 +312,10 @@ export const UploadAndGenerateEngine: React.FC<UploadAndGenerateEngineProps> = (
                 />
                 <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
                 <span className="text-xs font-semibold text-slate-700 block">
-                  Click or drag official PDF/TXT manual here
+                  Click or drag official PDF/DOCX/TXT manual here
                 </span>
                 <span className="text-[11px] text-slate-500 block mt-0.5">
-                  Supports CAPI schedules, NSS round circulars, or NAS reports
+                  Supports CAPI schedules, NSS round circulars, NAS reports, and Word-based guidance manuals
                 </span>
               </div>
             </div>
