@@ -149,7 +149,7 @@ Set `GEMINI_API_KEY` in the Vercel project environment variables if live Gemini 
 
 ## Current Production Deployment
 
-[https://prep-lens-mu.vercel.app/](https://prep-lens-mu.vercel.app/)
+[https://prep-lens-rr16.vercel.app/](https://prep-lens-rr16.vercel.app/)
 
 ## Admin Login
 
